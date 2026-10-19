@@ -20,7 +20,7 @@ async function notifyByEmail(pledge) {
     body: JSON.stringify({
       from: 'NoSo November <onboarding@resend.dev>',
       to: [to],
-      subject: `New pledge: ${pledge.name} — ${pledge.type}`,
+      subject: `New pledge: ${pledge.name} (${pledge.type})`,
       text: [
         `New pledge received.`,
         ``,
@@ -74,6 +74,34 @@ export default async function handler(req, res) {
     }
   }
 
-  res.setHeader('Allow', ['GET', 'POST']);
+  if (req.method === 'DELETE') {
+    try {
+      const adminKey = process.env.ADMIN_KEY;
+      const providedKey = req.headers['x-admin-key'];
+      if (!adminKey || providedKey !== adminKey) {
+        return res.status(401).json({ error: 'Unauthorized' });
+      }
+
+      const id = req.query?.id;
+      if (!id) {
+        return res.status(400).json({ error: 'Missing id' });
+      }
+
+      const pledges = (await kv.lrange(LIST_KEY, 0, -1)) || [];
+      const match = pledges.find(p => p.id === id);
+      if (!match) {
+        return res.status(404).json({ error: 'Pledge not found' });
+      }
+
+      // lrem removes by exact value match, so pass the same object shape that was stored.
+      await kv.lrem(LIST_KEY, 0, match);
+
+      return res.status(200).json({ ok: true });
+    } catch (err) {
+      return res.status(500).json({ error: 'Failed to delete pledge' });
+    }
+  }
+
+  res.setHeader('Allow', ['GET', 'POST', 'DELETE']);
   return res.status(405).end('Method Not Allowed');
 }

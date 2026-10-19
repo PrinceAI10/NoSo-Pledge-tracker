@@ -45,6 +45,9 @@ button.submit:disabled{opacity:.5;cursor:default;}
 .row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border);font-size:14px;}
 .row:last-child{border-bottom:none;}
 .row-tag{font-size:11px;padding:2px 9px;border-radius:999px;background:var(--teal-soft);color:var(--teal);font-weight:700;}
+.row-right{display:flex;align-items:center;gap:8px;}
+.del-btn{border:none;background:none;color:var(--muted);font-size:15px;line-height:1;cursor:pointer;padding:2px 4px;}
+.del-btn:hover{color:#c0392b;}
 .empty{color:var(--muted);font-size:13px;text-align:center;padding:14px 0;}
 .list-label{font-size:13px;color:var(--muted);font-weight:700;margin:28px 0 8px;}
 
@@ -125,8 +128,26 @@ function render(pledges){
   if(total===0){ listEl.innerHTML = '<div class="empty">No pledges yet, be the first.</div>'; return; }
   const sorted = pledges.slice().sort((a,b)=> (b.ts||0)-(a.ts||0)).slice(0,25);
   listEl.innerHTML = sorted.map(p=>
-    `<div class="row"><span>${esc(p.name)||'Anonymous'}${p.duration?' · '+esc(p.duration):''}</span><span class="row-tag">${esc(p.type)}</span></div>`
+    `<div class="row"><span>${esc(p.name)||'Anonymous'}${p.duration?' · '+esc(p.duration):''}</span>
+     <span class="row-right"><span class="row-tag">${esc(p.type)}</span><button class="del-btn" data-id="${esc(p.id)}" title="Remove this pledge">&times;</button></span></div>`
   ).join('');
+
+  listEl.querySelectorAll('.del-btn').forEach(btn=>{
+    btn.addEventListener('click', async ()=>{
+      const id = btn.dataset.id;
+      const key = prompt('Enter admin passcode to remove this pledge:');
+      if(!key) return;
+      try{
+        const res = await fetch('/api/pledges?id=' + encodeURIComponent(id), {
+          method: 'DELETE',
+          headers: { 'x-admin-key': key }
+        });
+        if(res.status === 401){ alert('Wrong passcode.'); return; }
+        if(!res.ok){ alert('Could not remove pledge.'); return; }
+        await loadPledges();
+      }catch(e){ alert('Could not remove pledge.'); }
+    });
+  });
 }
 
 async function loadPledges(){
