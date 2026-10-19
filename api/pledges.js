@@ -6,10 +6,13 @@ const LIST_KEY = 'noso:pledges';
 const MAX_NAME_LEN = 60;
 const MAX_DURATION_LEN = 60;
 const MAX_EMAIL_LEN = 254;
+const MAX_COUNTRY_LEN = 60;
+const MAX_REASON_LEN = 120;
+const MAX_PLATFORMS_LEN = 150;
 
 const WHATSAPP_LINK = 'https://whatsapp.com/channel/0029VbDnhhLCnA7lR8Km6i1i';
-
 const ADMIN_EMAIL = process.env.ADMIN_EMAIL;
+const ADMIN_KEY = process.env.ADMIN_KEY;
 const FROM_ADDRESS = process.env.RESEND_FROM || 'NoSo November <onboarding@resend.dev>';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
@@ -29,7 +32,7 @@ function formatDate(ts) {
 async function sendEmails(pledge) {
   const jobs = [];
 
-  // 1. PLEDGER EMAIL via EMAILJS
+  // --- 1. PLEDGER EMAIL via EMAILJS ---
   jobs.push(
     emailjs.send(
       process.env.EMAILJS_SERVICE_ID,
@@ -38,7 +41,8 @@ async function sendEmails(pledge) {
         to_email: pledge.email,
         name: pledge.name,
         type: pledge.type,
-        duration: pledge.duration || '-'
+        duration: pledge.duration || '-',
+        whatsapp_link: WHATSAPP_LINK
       },
       {
         publicKey: process.env.EMAILJS_PUBLIC_KEY,
@@ -47,7 +51,7 @@ async function sendEmails(pledge) {
     )
   );
 
-  // 2. ADMIN EMAIL via RESEND
+  // --- 2. ADMIN EMAIL via RESEND ---
   if (ADMIN_EMAIL && process.env.RESEND_API_KEY) {
     const adminHtml = `
       <div style="font-family:Arial,sans-serif;max-width:520px;margin:0 auto;color:#1a1721;">
@@ -57,8 +61,12 @@ async function sendEmails(pledge) {
         <div style="border:1px solid #e7e3f0;border-top:none;border-radius:0 0 10px 10px;padding:18px;">
           <p style="margin:0 0 12px;">A new pledge just came in:</p>
           <p style="margin:0 0 8px;"><strong>Name:</strong> ${pledge.name}</p>
+          <p style="margin:0 0 8px;"><strong>Email:</strong> ${pledge.email}</p>
+          <p style="margin:0 0 8px;"><strong>Country:</strong> ${pledge.country || '-'}</p>
           <p style="margin:0 0 8px;"><strong>Pledge:</strong> ${pledge.type}</p>
+          <p style="margin:0 0 8px;"><strong>Platforms:</strong> ${pledge.platforms || '-'}</p>
           <p style="margin:0 0 8px;"><strong>Duration:</strong> ${pledge.duration || '-'}</p>
+          <p style="margin:0 0 8px;"><strong>Reason:</strong> ${pledge.reason || '-'}</p>
           <p style="margin:0 0 8px;"><strong>Time:</strong> ${formatDate(pledge.ts)}</p>
         </div>
       </div>`;
@@ -108,13 +116,19 @@ export default async function handler(req, res) {
 
       const name = String(body?.name || 'Anonymous').slice(0, MAX_NAME_LEN);
       const duration = String(body?.duration || '').slice(0, MAX_DURATION_LEN);
+      const country = String(body?.country || '').slice(0, MAX_COUNTRY_LEN);
+      const reason = String(body?.reason || '').slice(0, MAX_REASON_LEN);
+      const platforms = String(body?.platforms || '').slice(0, MAX_PLATFORMS_LEN);
 
       const pledge = {
         id: 'p_' + Date.now() + '_' + Math.random().toString(36).slice(2, 8),
         name,
         email,
+        country,
         type,
+        platforms,
         duration,
+        reason,
         ts: Date.now()
       };
 
@@ -132,6 +146,35 @@ export default async function handler(req, res) {
     }
   }
 
-  res.setHeader('Allow', ['GET', 'POST']);
+  if (req.method === 'DELETE') {
+    try {
+      if (!ADMIN_KEY) {
+        return res.status(500).json({ error: 'Admin deletion is not configured' });
+      }
+
+      const providedKey = req.headers['x-admin-key'];
+      if (!providedKey || providedKey !== ADMIN_KEY) {
+        return res.status(401).json({ error: 'Invalid admin passcode' });
+      }
+
+      const id = req.query?.id;
+      if (!id) {
+        return res.status(400).json({ error: 'Missing pledge id' });
+      }
+
+      const stored = (await kv.lrange(LIST_KEY, 0, -1)) || [];
+      const match = stored.find((p) => p.id === id);
+      if (!match) {
+        return res.status(404).json({ error: 'Pledge not found' });
+      }
+
+      await kv.lrem(LIST_KEY, 0, match);
+      return res.status(200).json({ ok: true });
+    } catch (err) {
+      return res.status(500).json({ error: 'Failed to delete pledge' });
+    }
+  }
+
+  res.setHeader('Allow', ['GET', 'POST', 'DELETE']);
   return res.status(405).end('Method Not Allowed');
 }

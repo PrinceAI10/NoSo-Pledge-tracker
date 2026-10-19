@@ -19,12 +19,12 @@ body{margin:0;background:#ffffff !important;color:var(--text);
 body::before{content:"";position:fixed;inset:0 0 auto;height:calc(5px + env(safe-area-inset-top,0px));
   background:var(--bar);z-index:10;}
 .wrap{max-width:560px;margin:0 auto;padding:40px 22px 56px;}
+.logo{display:block;height:48px;width:auto;margin-bottom:18px;}
 .pill{display:inline-block;background:var(--orange);color:#fff;font-size:11.5px;font-weight:700;
   letter-spacing:.06em;text-transform:uppercase;padding:7px 14px;border-radius:999px;margin-bottom:18px;}
-h1{font-size:32px;line-height:1.15;margin:0 0 8px;font-weight:800;letter-spacing:-.02em;}
+h1{font-size:28px;line-height:1.15;margin:0 0 8px;font-weight:800;letter-spacing:-.01em;}
 h1 .u{border-bottom:4px solid var(--orange);}
-h2.subtitle{font-size:20px;color:var(--teal);margin:0 0 4px;font-weight:700;}
-p.lead{font-size:15px;line-height:1.55;margin:16px 0 4px;color:var(--muted);}
+p.lead{font-size:15px;line-height:1.55;margin:0 0 4px;color:var(--muted);}
 
 .form-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:24px;margin-top:24px;}
 .counter-row{display:flex;gap:10px;margin-bottom:4px;}
@@ -32,13 +32,21 @@ p.lead{font-size:15px;line-height:1.55;margin:16px 0 4px;color:var(--muted);}
 .stat-box .n{font-size:28px;font-weight:800;color:var(--teal);}
 .stat-box .l{font-size:11px;color:var(--muted);margin-top:2px;}
 label{display:block;font-size:13px;font-weight:700;margin:18px 0 6px;}
-input[type=text],input[type=email]{width:100%;padding:12px;border-radius:10px;border:1px solid var(--border);
-  background:#ffffff;color:var(--text);font-size:15px;}
+input[type=text],input[type=email],select{width:100%;padding:12px;border-radius:10px;border:1px solid var(--border);
+  background:#ffffff;color:var(--text);font-size:15px;font-family:inherit;}
+select{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%236c6878%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");background-repeat:no-repeat;background-position:right 12px top 50%;background-size:12px auto;}
+
 .options{display:flex;gap:10px;margin-top:6px;}
-.opt{flex:1;border:2px solid var(--border);border-radius:12px;padding:13px;cursor:pointer;text-align:center;}
+.opt{flex:1;border:2px solid var(--border);border-radius:12px;padding:13px;cursor:pointer;text-align:center;transition:all 0.2s;}
 .opt.sel{border-color:var(--orange);background:var(--orange-soft);}
 .opt b{display:block;font-size:14.5px;}
 .opt span{font-size:11.5px;color:var(--muted);}
+
+/* Platform Pills */
+.platforms{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px;}
+.plat-pill{border:2px solid var(--border);border-radius:999px;padding:8px 14px;font-size:13px;font-weight:600;cursor:pointer;background:#ffffff;transition:all 0.2s;user-select:none;}
+.plat-pill.sel{border-color:var(--orange);background:var(--orange-soft);color:var(--orange);}
+
 button.submit{margin-top:20px;width:100%;padding:15px;border:none;border-radius:10px;
   background:var(--orange);color:#fff;font-size:16px;font-weight:800;cursor:pointer;}
 button.submit:disabled{opacity:.5;cursor:default;}
@@ -46,6 +54,9 @@ button.submit:disabled{opacity:.5;cursor:default;}
 .row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border);font-size:14px;}
 .row:last-child{border-bottom:none;}
 .row-tag{font-size:11px;padding:2px 9px;border-radius:999px;background:var(--teal-soft);color:var(--teal);font-weight:700;}
+.row-right{display:flex;align-items:center;gap:8px;}
+.del-btn{border:none;background:none;color:var(--muted);font-size:15px;line-height:1;cursor:pointer;padding:2px 4px;}
+.del-btn:hover{color:#c0392b;}
 .empty{color:var(--muted);font-size:13px;text-align:center;padding:14px 0;}
 .list-label{font-size:13px;color:var(--muted);font-weight:700;margin:28px 0 8px;}
 
@@ -54,52 +65,79 @@ button.submit:disabled{opacity:.5;cursor:default;}
   color:var(--orange);background:var(--orange-soft);padding:4px 11px;border-radius:999px;margin-bottom:10px;}
 .blurb p{font-size:13.5px;line-height:1.55;color:var(--muted);margin:0;}
 
-footer{margin-top:30px;padding-top:24px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;}
-.footer-text{font-size:12px;color:var(--muted);line-height:1.5;flex:1;min-width:200px;}
+footer{margin-top:30px;padding-top:24px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;}
+.footer-text{font-size:12px;color:var(--muted);line-height:1.5;flex:1;min-width:200px;text-align:left;}
 .footer-text strong{color:var(--text);font-size:13px;display:block;margin-bottom:2px;}
-.footer-logos{display:flex;align-items:center;gap:8px;}
-.footer-logos img{width:auto;object-fit:contain;}
-.footer-logos .logo-noso{height:46px;}
-.footer-logos .logo-prince{height:52px; border-radius:50%;}
+.footer-logos{display:flex;align-items:center;gap:12px;}
+.footer-logos img{height:40px;width:auto;object-fit:contain;}
 .footer-x{font-size:14px;color:var(--text);font-weight:800;margin:0 4px;}
 </style>
 </head>
 <body>
 <div class="wrap">
 
-  <span class="pill">Your Choice, Your Pace</span>
+  <img class="logo" src="noso-logo.png" alt="NoSo Connection Collective logo">
+  <span class="pill">Youth Leader · NoSo Connection Collective</span>
   <h1>Take The <span class="u">Pledge.</span></h1>
-  <h2 class="subtitle">Pick The Reset That Fits Your Life.</h2>
-  <p class="lead">This November, reclaim your attention from social media. Not moderation, not "using it mindfully" - a full log-out, for a day, two weeks, or the whole month. Pick your pledge below and join the count, publicly.</p>
+  <p class="lead">This November, reclaim your attention from social media. Not moderation, not "using it mindfully." A full log-out, for a day, two weeks, or the whole month. Pick your pledge below and join the count, publicly.</p>
 
   <div class="form-card">
     <div class="counter-row">
-      <div class="stat-box"><div class="n" id="totalCount">-</div><div class="l">Total pledges</div></div>
-      <div class="stat-box"><div class="n" id="deepCount">-</div><div class="l">Deep Reset</div></div>
-      <div class="stat-box"><div class="n" id="reclaimCount">-</div><div class="l">Reclaim Window</div></div>
+      <div class="stat-box"><div class="n" id="totalCount">–</div><div class="l">Total pledges</div></div>
+      <div class="stat-box"><div class="n" id="deepCount">–</div><div class="l">Deep Reset</div></div>
+      <div class="stat-box"><div class="n" id="reclaimCount">–</div><div class="l">Reclaim Window</div></div>
     </div>
 
     <label>Your name (or initials)</label>
     <input type="text" id="nameInput" placeholder="e.g. Prince A." maxlength="60">
+    
     <label>Your email (for confirmation)</label>
     <input type="email" id="emailInput" placeholder="you@example.com" autocomplete="email" required>
+
+    <label>Country</label>
+    <input type="text" id="countryInput" placeholder="e.g. Ghana" maxlength="60">
+
     <label>Choose your pledge</label>
     <div class="options">
       <div class="opt" data-val="Deep Reset"><b>Deep Reset</b><span>Full month off</span></div>
-      <div class="opt" data-val="Reclaim Window"><b>Reclaim Window</b><span>1 day - 2 weeks</span></div>
+      <div class="opt" data-val="Reclaim Window"><b>Reclaim Window</b><span>1 day – 2 weeks</span></div>
     </div>
+
+    <label>Which platforms are you logging out of?</label>
+    <div class="platforms" id="platformOptions">
+      <div class="plat-pill" data-val="Instagram">Instagram</div>
+      <div class="plat-pill" data-val="TikTok">TikTok</div>
+      <div class="plat-pill" data-val="X (Twitter)">X (Twitter)</div>
+      <div class="plat-pill" data-val="Snapchat">Snapchat</div>
+      <div class="plat-pill" data-val="Facebook">Facebook</div>
+      <div class="plat-pill" data-val="YouTube">YouTube</div>
+    </div>
+
     <label>Duration (optional)</label>
-    <input type="text" id="durationInput" placeholder="e.g. Nov 1-30, or 5 days" maxlength="60">
-    <button class="submit" id="submitBtn" disabled>Loading...</button>
+    <select id="durationInput">
+      <option value="">Select duration...</option>
+      <option value="1 day">1 day</option>
+      <option value="2 days">2 days</option>
+      <option value="3 days">3 days</option>
+      <option value="1 week">1 week</option>
+      <option value="2 weeks">2 weeks</option>
+      <option value="3 weeks">3 weeks</option>
+      <option value="1 month - I'M ALL IN">1 month - I'M ALL IN</option>
+    </select>
+
+    <label>Why are you doing this detox? (optional)</label>
+    <input type="text" id="reasonInput" placeholder="e.g. To focus on my studies" maxlength="120">
+
+    <button class="submit" id="submitBtn" disabled>Loading…</button>
     <div class="msg" id="msg"></div>
 
     <div class="list-label">Recent pledges</div>
-    <div id="pledgeList"><div class="empty">Loading...</div></div>
+    <div id="pledgeList"><div class="empty">Loading…</div></div>
   </div>
 
   <div class="blurb">
     <span class="tag">Why This Matters</span>
-    <p>Every scroll is engineered to hold your attention a little longer, because attention is the product. You can't out-discipline a system built to outlast your willpower - the only way to actually win is to log out. This pledge isn't about cutting back; it's about stepping away completely, so the people and life in front of you get your attention back.</p>
+    <p>Every scroll is engineered to hold your attention a little longer, because attention is the product. You can't out-discipline a system built to outlast your willpower. The only way to actually win is to log out. This pledge isn't about cutting back; it's about stepping away completely, so the people and life in front of you get your attention back.</p>
   </div>
 
   <footer>
@@ -107,23 +145,36 @@ footer{margin-top:30px;padding-top:24px;border-top:1px solid var(--border);displ
       <strong>Prince Owusu Afriyie</strong>
       Youth Leader, NoSo Connection Collective<br>NoSo November 2026
     </div>
-    
     <div class="footer-logos">
-      <img src="noso-logo.png" alt="NoSo Connection Collective" class="logo-noso">
+      <img src="noso-logo.png" alt="NoSo Connection Collective">
       <span class="footer-x">x</span>
-      <img src="prince-logo.png" alt="Prince Owusu Afriyie Logo" class="logo-prince">
+      <img src="prince-logo.png" alt="Prince Owusu Afriyie Logo">
     </div>
   </footer>
 </div>
 
 <script>
 let chosen = null;
+let selectedPlatforms = [];
 
 document.querySelectorAll('.opt').forEach(el=>{
   el.addEventListener('click', ()=>{
     document.querySelectorAll('.opt').forEach(o=>o.classList.remove('sel'));
     el.classList.add('sel');
     chosen = el.dataset.val;
+  });
+});
+
+document.querySelectorAll('.plat-pill').forEach(el=>{
+  el.addEventListener('click', ()=>{
+    const val = el.dataset.val;
+    if (selectedPlatforms.includes(val)) {
+      selectedPlatforms = selectedPlatforms.filter(p => p !== val);
+      el.classList.remove('sel');
+    } else {
+      selectedPlatforms.push(val);
+      el.classList.add('sel');
+    }
   });
 });
 
@@ -142,9 +193,31 @@ function render(pledges){
   const listEl = document.getElementById('pledgeList');
   if(total===0){ listEl.innerHTML = '<div class="empty">No pledges yet, be the first.</div>'; return; }
   const sorted = pledges.slice().sort((a,b)=> (b.ts||0)-(a.ts||0)).slice(0,25);
-  listEl.innerHTML = sorted.map(p=>
-    `<div class="row"><span>${esc(p.name)||'Anonymous'}${p.duration?' - '+esc(p.duration):''}</span><span class="row-tag">${esc(p.type)}</span></div>`
-  ).join('');
+  
+  listEl.innerHTML = sorted.map(p=> {
+    const parts = [esc(p.name) || 'Anonymous'];
+    if (p.duration) parts.push(esc(p.duration));
+    if (p.country) parts.push(esc(p.country));
+    return `<div class="row"><span>${parts.join(' · ')}</span>
+     <span class="row-right"><span class="row-tag">${esc(p.type)}</span><button class="del-btn" data-id="${esc(p.id)}" title="Remove this pledge">&times;</button></span></div>`;
+  }).join('');
+
+  listEl.querySelectorAll('.del-btn').forEach(btn=>{
+    btn.addEventListener('click', async ()=>{
+      const id = btn.dataset.id;
+      const key = prompt('Enter admin passcode to remove this pledge:');
+      if(!key) return;
+      try{
+        const res = await fetch('/api/pledges?id=' + encodeURIComponent(id), {
+          method: 'DELETE',
+          headers: { 'x-admin-key': key }
+        });
+        if(res.status === 401){ alert('Wrong passcode.'); return; }
+        if(!res.ok){ alert('Could not remove pledge.'); return; }
+        await loadPledges();
+      }catch(e){ alert('Could not remove pledge.'); }
+    });
+  });
 }
 
 async function loadPledges(){
@@ -172,14 +245,28 @@ async function init(){
   btn.addEventListener('click', async ()=>{
     const name = document.getElementById('nameInput').value.trim();
     const email = document.getElementById('emailInput').value.trim();
-    const duration = document.getElementById('durationInput').value.trim();
-
+    const country = document.getElementById('countryInput').value.trim();
+    const duration = document.getElementById('durationInput').value;
+    const reason = document.getElementById('reasonInput').value.trim();
+    
     if(!chosen){ msg.textContent = 'Please choose Deep Reset or Reclaim Window.'; return; }
     if(!validEmail(email)){ msg.textContent = 'Please enter a valid email so we can send your confirmation.'; return; }
-
+    
     btn.disabled = true;
     msg.textContent = '';
-    const data = { name: name || 'Anonymous', email, type: chosen, duration };
+    
+    const platforms = selectedPlatforms.join(', ');
+    
+    const data = { 
+      name: name || 'Anonymous', 
+      email, 
+      country, 
+      type: chosen, 
+      platforms,
+      duration, 
+      reason 
+    };
+    
     try{
       const res = await fetch('/api/pledges', {
         method: 'POST',
@@ -190,9 +277,13 @@ async function init(){
       msg.textContent = 'Pledge recorded. Check your inbox for your confirmation email.';
       document.getElementById('nameInput').value = '';
       document.getElementById('emailInput').value = '';
+      document.getElementById('countryInput').value = '';
       document.getElementById('durationInput').value = '';
+      document.getElementById('reasonInput').value = '';
       document.querySelectorAll('.opt').forEach(o=>o.classList.remove('sel'));
+      document.querySelectorAll('.plat-pill').forEach(o=>o.classList.remove('sel'));
       chosen = null;
+      selectedPlatforms = [];
       await loadPledges();
     }catch(e){
       msg.textContent = 'Could not save pledge. Please try again.';
