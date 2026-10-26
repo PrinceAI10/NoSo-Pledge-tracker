@@ -1596,7 +1596,308 @@
         </div>
         <div class="brand-copy">
           <span class="brand-name">NoSo November</span>
-          <span class="brand-subtitle">NoSo Connection Collective</span>
+          <span class="brand-subtitle">    /* White, purple and gold finishing layer */
+
+    .ambient {
+      position: fixed;
+      z-index: 0;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .page {
+      position: relative;
+      z-index: 1;
+    }
+
+    .glow-one {
+      background: radial-gradient(circle, rgba(112, 72, 168, 0.16), transparent 70%);
+      filter: blur(12px);
+    }
+
+    .glow-two {
+      background: radial-gradient(circle, rgba(112, 72, 168, 0.13), transparent 70%);
+      filter: blur(16px);
+    }
+
+    .glow-three {
+      background: radial-gradient(circle, rgba(212, 172, 73, 0.10), transparent 70%);
+      filter: blur(15px);
+    }
+
+    .bubble {
+      border-color: rgba(112, 72, 168, 0.25);
+      background: radial-gradient(
+        circle at 30% 25%,
+        rgba(255, 255, 255, 0.98),
+        rgba(211, 194, 237, 0.38) 45%,
+        rgba(112, 72, 168, 0.07) 75%
+      );
+      box-shadow:
+        inset 0 0 10px rgba(255, 255, 255, 0.8),
+        0 0 22px rgba(112, 72, 168, 0.12);
+    }
+
+    .bubble.gold {
+      border-color: rgba(181, 138, 44, 0.45);
+      background: radial-gradient(
+        circle at 30% 25%,
+        #FFFFFF,
+        rgba(240, 217, 145, 0.38) 50%,
+        rgba(181, 138, 44, 0.06) 80%
+      );
+      box-shadow: 0 0 24px rgba(181, 138, 44, 0.12);
+    }
+
+    .glass-card {
+      border-color: rgba(92, 57, 135, 0.13);
+      background: rgba(255, 255, 255, 0.91);
+      box-shadow:
+        0 18px 55px rgba(56, 32, 82, 0.065),
+        0 3px 12px rgba(56, 32, 82, 0.025);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      transition: border-color 250ms ease, box-shadow 250ms ease, transform 250ms ease;
+    }
+
+    .glass-card:hover {
+      border-color: rgba(112, 72, 168, 0.21);
+      box-shadow:
+        0 22px 65px rgba(56, 32, 82, 0.085),
+        0 0 30px rgba(112, 72, 168, 0.045);
+    }
+
+    .pledge-card::before {
+      background: radial-gradient(circle, rgba(112, 72, 168, 0.10), transparent 72%);
+    }
+
+    .choice {
+      border-color: rgba(92, 57, 135, 0.15);
+      background: linear-gradient(145deg, #FFFFFF, #FCFAFF);
+      box-shadow: 0 3px 12px rgba(56, 32, 82, 0.025);
+    }
+
+    .choice:hover {
+      border-color: rgba(112, 72, 168, 0.42);
+      background: linear-gradient(145deg, #FFFFFF, #F7F1FD);
+      box-shadow: 0 12px 28px rgba(56, 32, 82, 0.07);
+    }
+
+    .choice.selected {
+      border-color: var(--gold);
+      background: linear-gradient(145deg, #F8F3FF, #FFFFFF 65%, #FFFCF3);
+      box-shadow:
+        inset 0 0 0 1px rgba(181, 138, 44, 0.12),
+        0 10px 30px rgba(112, 72, 168, 0.10),
+        0 0 0 3px rgba(181, 138, 44, 0.045);
+    }
+
+    .choice-icon {
+      background: #F3ECFB;
+      border-color: rgba(112, 72, 168, 0.13);
+    }
+
+    .choice:nth-child(2) .choice-icon {
+      background: #FBF5E5;
+      border-color: rgba(181, 138, 44, 0.20);
+      color: #947020;
+    }
+
+    .platform {
+      background: #FFFFFF;
+      border-color: rgba(92, 57, 135, 0.17);
+      box-shadow: 0 2px 7px rgba(56, 32, 82, 0.025);
+    }
+
+    .platform.selected {
+      background: #F3ECFB;
+      border-color: var(--purple);
+      color: #503171;
+    }
+
+    .recent-section {
+      background: rgba(255, 255, 255, 0.96);
+    }
+
+    .pledge-row {
+      border-color: rgba(92, 57, 135, 0.10);
+    }
+
+    .pledge-tag {
+      background: #F3ECFB;
+      border-color: rgba(112, 72, 168, 0.17);
+      color: #62418B;
+    }
+
+    .pledge-tag.gold {
+      background: #FBF5E5;
+      border-color: rgba(181, 138, 44, 0.24);
+      color: #80601D;
+    }
+
+    .why-card {
+      border-color: rgba(181, 138, 44, 0.20);
+      background:
+        radial-gradient(ellipse at 100% 0%, rgba(212, 172, 73, 0.075), transparent 48%),
+        radial-gradient(ellipse at 0% 100%, rgba(112, 72, 168, 0.055), transparent 52%),
+        #FFFFFF;
+      box-shadow: 0 16px 45px rgba(56, 32, 82, 0.045);
+    }
+
+    .accountability {
+      border-color: rgba(92, 57, 135, 0.12);
+      background: linear-gradient(145deg, #FCFAFF, #FFFFFF);
+    }
+
+    .whatsapp-link {
+      background: #F7F2FC;
+      border-color: rgba(112, 72, 168, 0.18);
+      color: #503171;
+    }
+
+    .whatsapp-link:hover {
+      background: #F0E7FA;
+      border-color: rgba(181, 138, 44, 0.40);
+    }
+
+    .footer {
+      border-color: rgba(92, 57, 135, 0.13);
+    }
+
+    .submit-button {
+      background: linear-gradient(105deg, #E6D8F6 0%, #FFFFFF 48%, #F0D991 100%);
+      border-color: rgba(112, 72, 168, 0.17);
+      box-shadow:
+        0 8px 24px rgba(112, 72, 168, 0.13),
+        0 0 28px rgba(181, 138, 44, 0.055);
+    }
+
+    .submit-button:hover {
+      box-shadow:
+        0 13px 32px rgba(112, 72, 168, 0.19),
+        0 0 35px rgba(181, 138, 44, 0.09);
+    }
+
+    .stat {
+      border-color: rgba(92, 57, 135, 0.12);
+      background: linear-gradient(145deg, #FFFFFF, #FCFAFF);
+      box-shadow: 0 5px 20px rgba(56, 32, 82, 0.025);
+      transition: transform 250ms ease, box-shadow 250ms ease;
+    }
+
+    .stat:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 28px rgba(56, 32, 82, 0.07);
+    }
+
+    .stat:nth-child(2) .stat-number {
+      color: #947020;
+    }
+
+    .stat:nth-child(3) .stat-number {
+      color: #7951A6;
+    }
+
+    .hero .brand-mark {
+      background: linear-gradient(145deg, #FFFFFF, #F4EDFC);
+      border-color: rgba(181, 138, 44, 0.40);
+      box-shadow:
+        0 8px 25px rgba(112, 72, 168, 0.09),
+        0 0 25px rgba(181, 138, 44, 0.05);
+      animation: markFloat 5s ease-in-out infinite;
+    }
+
+    .eyebrow {
+      background: #FBF7EC;
+      border-color: rgba(181, 138, 44, 0.24);
+      color: #80601D;
+    }
+
+    .hero-note {
+      color: #80601D;
+    }
+
+    .live-label {
+      background: #FBF7EC;
+      border-color: rgba(181, 138, 44, 0.20);
+      color: #80601D;
+    }
+
+    .goal-bullet {
+      background: #FBF5E5;
+      border-color: rgba(181, 138, 44, 0.24);
+      color: #947020;
+    }
+
+    @keyframes markFloat {
+      0%, 100% {
+        transform: translateY(0);
+        box-shadow: 0 8px 25px rgba(112, 72, 168, 0.09);
+      }
+      50% {
+        transform: translateY(-4px);
+        box-shadow:
+          0 13px 30px rgba(112, 72, 168, 0.13),
+          0 0 22px rgba(181, 138, 44, 0.08);
+      }
+    }
+
+    @keyframes softPulse {
+      0%, 100% {
+        box-shadow: 0 0 0 0 rgba(112, 72, 168, 0.08);
+      }
+      50% {
+        box-shadow: 0 0 0 8px rgba(112, 72, 168, 0);
+      }
+    }
+
+    .eyebrow-dot {
+      animation: softPulse 3s ease-out infinite;
+    }
+
+    .live-dot {
+      animation: softPulse 3s ease-out infinite;
+    }
+
+    .hero .title-accent {
+      background-size: 200% auto;
+      animation: titleShimmer 8s ease-in-out infinite;
+    }
+
+    @keyframes titleShimmer {
+      0%, 100% {
+        background-position: 0% center;
+      }
+      50% {
+        background-position: 100% center;
+      }
+    }
+
+    .fade-in.visible {
+      animation: polishedReveal 700ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+    }
+
+    @keyframes polishedReveal {
+      from {
+        opacity: 0;
+        transform: translateY(22px) scale(0.99);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hero .brand-mark,
+      .hero .title-accent,
+      .eyebrow-dot,
+      .live-dot {
+        animation: none !important;
+      }
+    }
+  </style>llective</span>
         </div>
       </div>
 
@@ -1909,7 +2210,308 @@
       <div>
         <span class="footer-name">Prince Owusu Afriyie</span>
         <span class="footer-description">
-          Youth Leader, NoSo Connection Collective<br>
+          Youth Leader,     /* White, purple and gold finishing layer */
+
+    .ambient {
+      position: fixed;
+      z-index: 0;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .page {
+      position: relative;
+      z-index: 1;
+    }
+
+    .glow-one {
+      background: radial-gradient(circle, rgba(112, 72, 168, 0.16), transparent 70%);
+      filter: blur(12px);
+    }
+
+    .glow-two {
+      background: radial-gradient(circle, rgba(112, 72, 168, 0.13), transparent 70%);
+      filter: blur(16px);
+    }
+
+    .glow-three {
+      background: radial-gradient(circle, rgba(212, 172, 73, 0.10), transparent 70%);
+      filter: blur(15px);
+    }
+
+    .bubble {
+      border-color: rgba(112, 72, 168, 0.25);
+      background: radial-gradient(
+        circle at 30% 25%,
+        rgba(255, 255, 255, 0.98),
+        rgba(211, 194, 237, 0.38) 45%,
+        rgba(112, 72, 168, 0.07) 75%
+      );
+      box-shadow:
+        inset 0 0 10px rgba(255, 255, 255, 0.8),
+        0 0 22px rgba(112, 72, 168, 0.12);
+    }
+
+    .bubble.gold {
+      border-color: rgba(181, 138, 44, 0.45);
+      background: radial-gradient(
+        circle at 30% 25%,
+        #FFFFFF,
+        rgba(240, 217, 145, 0.38) 50%,
+        rgba(181, 138, 44, 0.06) 80%
+      );
+      box-shadow: 0 0 24px rgba(181, 138, 44, 0.12);
+    }
+
+    .glass-card {
+      border-color: rgba(92, 57, 135, 0.13);
+      background: rgba(255, 255, 255, 0.91);
+      box-shadow:
+        0 18px 55px rgba(56, 32, 82, 0.065),
+        0 3px 12px rgba(56, 32, 82, 0.025);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      transition: border-color 250ms ease, box-shadow 250ms ease, transform 250ms ease;
+    }
+
+    .glass-card:hover {
+      border-color: rgba(112, 72, 168, 0.21);
+      box-shadow:
+        0 22px 65px rgba(56, 32, 82, 0.085),
+        0 0 30px rgba(112, 72, 168, 0.045);
+    }
+
+    .pledge-card::before {
+      background: radial-gradient(circle, rgba(112, 72, 168, 0.10), transparent 72%);
+    }
+
+    .choice {
+      border-color: rgba(92, 57, 135, 0.15);
+      background: linear-gradient(145deg, #FFFFFF, #FCFAFF);
+      box-shadow: 0 3px 12px rgba(56, 32, 82, 0.025);
+    }
+
+    .choice:hover {
+      border-color: rgba(112, 72, 168, 0.42);
+      background: linear-gradient(145deg, #FFFFFF, #F7F1FD);
+      box-shadow: 0 12px 28px rgba(56, 32, 82, 0.07);
+    }
+
+    .choice.selected {
+      border-color: var(--gold);
+      background: linear-gradient(145deg, #F8F3FF, #FFFFFF 65%, #FFFCF3);
+      box-shadow:
+        inset 0 0 0 1px rgba(181, 138, 44, 0.12),
+        0 10px 30px rgba(112, 72, 168, 0.10),
+        0 0 0 3px rgba(181, 138, 44, 0.045);
+    }
+
+    .choice-icon {
+      background: #F3ECFB;
+      border-color: rgba(112, 72, 168, 0.13);
+    }
+
+    .choice:nth-child(2) .choice-icon {
+      background: #FBF5E5;
+      border-color: rgba(181, 138, 44, 0.20);
+      color: #947020;
+    }
+
+    .platform {
+      background: #FFFFFF;
+      border-color: rgba(92, 57, 135, 0.17);
+      box-shadow: 0 2px 7px rgba(56, 32, 82, 0.025);
+    }
+
+    .platform.selected {
+      background: #F3ECFB;
+      border-color: var(--purple);
+      color: #503171;
+    }
+
+    .recent-section {
+      background: rgba(255, 255, 255, 0.96);
+    }
+
+    .pledge-row {
+      border-color: rgba(92, 57, 135, 0.10);
+    }
+
+    .pledge-tag {
+      background: #F3ECFB;
+      border-color: rgba(112, 72, 168, 0.17);
+      color: #62418B;
+    }
+
+    .pledge-tag.gold {
+      background: #FBF5E5;
+      border-color: rgba(181, 138, 44, 0.24);
+      color: #80601D;
+    }
+
+    .why-card {
+      border-color: rgba(181, 138, 44, 0.20);
+      background:
+        radial-gradient(ellipse at 100% 0%, rgba(212, 172, 73, 0.075), transparent 48%),
+        radial-gradient(ellipse at 0% 100%, rgba(112, 72, 168, 0.055), transparent 52%),
+        #FFFFFF;
+      box-shadow: 0 16px 45px rgba(56, 32, 82, 0.045);
+    }
+
+    .accountability {
+      border-color: rgba(92, 57, 135, 0.12);
+      background: linear-gradient(145deg, #FCFAFF, #FFFFFF);
+    }
+
+    .whatsapp-link {
+      background: #F7F2FC;
+      border-color: rgba(112, 72, 168, 0.18);
+      color: #503171;
+    }
+
+    .whatsapp-link:hover {
+      background: #F0E7FA;
+      border-color: rgba(181, 138, 44, 0.40);
+    }
+
+    .footer {
+      border-color: rgba(92, 57, 135, 0.13);
+    }
+
+    .submit-button {
+      background: linear-gradient(105deg, #E6D8F6 0%, #FFFFFF 48%, #F0D991 100%);
+      border-color: rgba(112, 72, 168, 0.17);
+      box-shadow:
+        0 8px 24px rgba(112, 72, 168, 0.13),
+        0 0 28px rgba(181, 138, 44, 0.055);
+    }
+
+    .submit-button:hover {
+      box-shadow:
+        0 13px 32px rgba(112, 72, 168, 0.19),
+        0 0 35px rgba(181, 138, 44, 0.09);
+    }
+
+    .stat {
+      border-color: rgba(92, 57, 135, 0.12);
+      background: linear-gradient(145deg, #FFFFFF, #FCFAFF);
+      box-shadow: 0 5px 20px rgba(56, 32, 82, 0.025);
+      transition: transform 250ms ease, box-shadow 250ms ease;
+    }
+
+    .stat:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 28px rgba(56, 32, 82, 0.07);
+    }
+
+    .stat:nth-child(2) .stat-number {
+      color: #947020;
+    }
+
+    .stat:nth-child(3) .stat-number {
+      color: #7951A6;
+    }
+
+    .hero .brand-mark {
+      background: linear-gradient(145deg, #FFFFFF, #F4EDFC);
+      border-color: rgba(181, 138, 44, 0.40);
+      box-shadow:
+        0 8px 25px rgba(112, 72, 168, 0.09),
+        0 0 25px rgba(181, 138, 44, 0.05);
+      animation: markFloat 5s ease-in-out infinite;
+    }
+
+    .eyebrow {
+      background: #FBF7EC;
+      border-color: rgba(181, 138, 44, 0.24);
+      color: #80601D;
+    }
+
+    .hero-note {
+      color: #80601D;
+    }
+
+    .live-label {
+      background: #FBF7EC;
+      border-color: rgba(181, 138, 44, 0.20);
+      color: #80601D;
+    }
+
+    .goal-bullet {
+      background: #FBF5E5;
+      border-color: rgba(181, 138, 44, 0.24);
+      color: #947020;
+    }
+
+    @keyframes markFloat {
+      0%, 100% {
+        transform: translateY(0);
+        box-shadow: 0 8px 25px rgba(112, 72, 168, 0.09);
+      }
+      50% {
+        transform: translateY(-4px);
+        box-shadow:
+          0 13px 30px rgba(112, 72, 168, 0.13),
+          0 0 22px rgba(181, 138, 44, 0.08);
+      }
+    }
+
+    @keyframes softPulse {
+      0%, 100% {
+        box-shadow: 0 0 0 0 rgba(112, 72, 168, 0.08);
+      }
+      50% {
+        box-shadow: 0 0 0 8px rgba(112, 72, 168, 0);
+      }
+    }
+
+    .eyebrow-dot {
+      animation: softPulse 3s ease-out infinite;
+    }
+
+    .live-dot {
+      animation: softPulse 3s ease-out infinite;
+    }
+
+    .hero .title-accent {
+      background-size: 200% auto;
+      animation: titleShimmer 8s ease-in-out infinite;
+    }
+
+    @keyframes titleShimmer {
+      0%, 100% {
+        background-position: 0% center;
+      }
+      50% {
+        background-position: 100% center;
+      }
+    }
+
+    .fade-in.visible {
+      animation: polishedReveal 700ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+    }
+
+    @keyframes polishedReveal {
+      from {
+        opacity: 0;
+        transform: translateY(22px) scale(0.99);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hero .brand-mark,
+      .hero .title-accent,
+      .eyebrow-dot,
+      .live-dot {
+        animation: none !important;
+      }
+    }
+  </style>llective<br>
           NoSo November 2026 · Kumasi, Ghana
         </span>
       </div>
